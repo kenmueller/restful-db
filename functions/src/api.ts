@@ -2,7 +2,6 @@ import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
 import * as express from 'express'
 import * as secure from 'securejs'
-import * as _ from 'lodash'
 
 import { ID_LENGTH } from './constants'
 
@@ -50,7 +49,7 @@ app.post('/:path', (req, res) => {
 	const { params, body } = req
 	const documentReference = documentFromPath(params.path)
 	const id = newId()
-	const updateObject = { [id]: JSON.stringify(_.omit(body, 'id')) }
+	const updateObject = { [id]: JSON.stringify({ ...body, id: undefined }) }
 	return documentReference.get().then(document =>
 		document.exists
 			? documentReference.update(updateObject)
@@ -60,6 +59,8 @@ app.post('/:path', (req, res) => {
 
 // Update all properties of a record
 // app.put('/:path/:id', (req, res) => {
+// 	const { params, body } = req
+// 	const { path, id } = params
 	
 // })
 
