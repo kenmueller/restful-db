@@ -25,3 +25,9 @@ node_modules/
 .yarn-integrity
 .env
 build/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.pnp
+.pnp.js
