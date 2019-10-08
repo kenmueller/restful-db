@@ -37,6 +37,11 @@ const createRecord = (project: string, records: string, id: string, res: express
 const newId = (): string =>
 	secure.newId(ID_LENGTH)
 
+const shouldDeleteRecordList = (records: FirebaseFirestore.DocumentData, deletedRecord: string): boolean => {
+	const keys = Object.keys(records)
+	return keys.length === 1 && keys[0] === deletedRecord
+}
+
 // Get all data for a project
 app.get('/api/:project', ({ params: { project } }, res) =>
 	firestore.collection(`projects/${project}/data`).get().then(snapshot =>
@@ -95,6 +100,13 @@ app.patch('/api/:project/:records/:recordId', ({ params: { project, records, rec
 )
 
 // Delete record
-// app.delete('/:path/:id', (req, res) => {
-	
-// })
+app.delete('/api/:project/:records/:recordId', ({ params: { project, records, recordId } }, res) =>
+	getRecordsSnapshot(project, records).then(snapshot =>
+		(snapshot.exists
+			? shouldDeleteRecordList(snapshot.data() || {}, recordId)
+				? snapshot.ref.delete()
+				: snapshot.ref.update({ [recordId]: admin.firestore.FieldValue.delete() })
+			: Promise.resolve({})
+		).then(() => res.json())
+	)
+)
