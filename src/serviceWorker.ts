@@ -21,7 +21,6 @@ export function register(config?: Config) {
 			const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`
 			if (isLocalhost) {
 				checkValidServiceWorker(swUrl, config)
-				// tslint:disable-next-line: no-floating-promises
 				navigator.serviceWorker.ready.then(() =>
 					console.log('This web app is being served cache-first by a service worker. To learn more, visit https://bit.ly/CRA-PWA')
 				)
@@ -59,7 +58,6 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
 	fetch(swUrl).then(response => {
 		const contentType = response.headers.get('content-type')
 		if (response.status === 404 || (contentType !== null && contentType.indexOf('javascript') === -1))
-			// tslint:disable-next-line: no-floating-promises
 			navigator.serviceWorker.ready.then(registration =>
 				registration.unregister().then(() =>
 					window.location.reload()
@@ -74,7 +72,6 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
 
 export function unregister() {
 	if ('serviceWorker' in navigator)
-		// tslint:disable-next-line: no-floating-promises
 		navigator.serviceWorker.ready.then(registration =>
 			registration.unregister()
 		)
