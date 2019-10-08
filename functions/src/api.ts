@@ -110,3 +110,11 @@ app.delete('/api/:project/:records/:recordId', ({ params: { project, records, re
 			: Promise.resolve({})
 	).then(() => res.json()).catch(() => res.status(500).json())
 )
+
+// Delete record list
+app.delete('/api/:project/:records', ({ params: { project, records } }, res) =>
+	getRecordsReference(project, records)
+		.delete()
+		.then(() => res.json())
+		.catch(() => res.status(500).json())
+)
