@@ -100,6 +100,14 @@ app.patch('/api/:project/:records/:recordId', ({ params: { project, records, rec
 	}).catch(() => res.status(500).json({}))
 )
 
+// Delete record list
+app.delete('/api/:project/:records', ({ params: { project, records } }, res) =>
+	getRecordsReference(project, records)
+		.delete()
+		.then(() => res.json())
+		.catch(() => res.status(500).json())
+)
+
 // Delete record
 app.delete('/api/:project/:records/:recordId', ({ params: { project, records, recordId } }, res) =>
 	getRecordsSnapshot(project, records).then(snapshot =>
@@ -109,12 +117,4 @@ app.delete('/api/:project/:records/:recordId', ({ params: { project, records, re
 				: snapshot.ref.update({ [recordId]: admin.firestore.FieldValue.delete() })
 			: Promise.resolve({})
 	).then(() => res.json()).catch(() => res.status(500).json())
-)
-
-// Delete record list
-app.delete('/api/:project/:records', ({ params: { project, records } }, res) =>
-	getRecordsReference(project, records)
-		.delete()
-		.then(() => res.json())
-		.catch(() => res.status(500).json())
 )
