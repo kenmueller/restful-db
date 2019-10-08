@@ -26,21 +26,20 @@ const createSendableRecordsFromDocumentSnapshot = (snapshot: FirebaseFirestore.D
 		createSendableRecord(id, json)
 	)
 
-const createRecord = (project: string, records: string, id: string, res: express.Response, data: object): Promise<express.Response> => {
-	const updateObject = { [id]: JSON.stringify({ ...data, id: undefined }) }
-	return getRecordsSnapshot(project, records).then(snapshot =>
-		snapshot.exists
-			? snapshot.ref.update(updateObject)
-			: snapshot.ref.set(updateObject)
+const createRecord = (project: string, records: string, id: string, res: express.Response, data: object): Promise<express.Response> =>
+	getRecordsSnapshot(project, records).then(snapshot =>
+		(snapshot.exists
+			? snapshot.ref.update
+			: snapshot.ref.set
+		)({ [id]: JSON.stringify({ ...data, id: undefined }) })
 	).then(() => res.json({ ...data, id })).catch(() => res.status(500).json({}))
-}
 
 const newId = (): string =>
 	secure.newId(ID_LENGTH)
 
 // Get all data for a project
-app.get('/api/:project', (req, res) =>
-	firestore.collection(`projects/${req.params.project}/data`).get().then(snapshot =>
+app.get('/api/:project', ({ params: { project } }, res) =>
+	firestore.collection(`projects/${project}/data`).get().then(snapshot =>
 		snapshot.docs.reduce((acc, document) => ({
 			...acc,
 			[document.id]: createSendableRecordsFromDocumentSnapshot(document)
@@ -49,52 +48,51 @@ app.get('/api/:project', (req, res) =>
 )
 
 // List all records
-app.get('/api/:project/:records', (req, res) => {
-	const { project, records } = req.params
-	return getRecordsSnapshot(project, records)
+app.get('/api/:project/:records', ({ params: { project, records } }, res) =>
+	getRecordsSnapshot(project, records)
 		.then(createSendableRecordsFromDocumentSnapshot)
 		.then(res.json.bind(res))
 		.catch(() => res.status(500).json([]))
-})
+)
 
 // Get record
-app.get('/api/:project/:records/:recordId', (req, res) => {
-	const { project, records, recordId } = req.params
-	return getRecordsSnapshot(project, records).then(snapshot => {
+app.get('/api/:project/:records/:recordId', ({ params: { project, records, recordId } }, res) =>
+	getRecordsSnapshot(project, records).then(snapshot => {
 		const json = snapshot.get(recordId)
 		return json
 			? res.json(createSendableRecord(recordId, json))
 			: res.status(404).json({})
 	})
-})
+)
 
 // Create record
-app.post('/api/:project/:records', (req, res) => {
-	const { params, body } = req
-	const { project, records } = params
-	return createRecord(project, records, newId(), res, body)
-})
+app.post('/api/:project/:records', ({ params: { project, records }, body }, res) =>
+	createRecord(project, records, newId(), res, body)
+)
 
 // Update all properties of a record
-app.put('/api/:project/:records/:id', (req, res) => {
-	const { params, body } = req
-	const { project, records, id } = params
-	return createRecord(project, records, id, res, body)
-})
+app.put('/api/:project/:records/:recordId', ({ params: { project, records, recordId }, body }, res) =>
+	createRecord(project, records, recordId, res, body)
+)
 
 // Update some properties of a record
-// app.patch('/:project/:path/:id', (req, res) => {
-// 	const { params, body } = req
-// 	const { project, path, id } = params
-// 	return snapshotFromPath(project, path).then(snapshot =>
-// 		snapshot.exists
-// 			? snapshot.ref.update({
-// 				...snapshot.get(id) || {},
-
-// 			})
-// 			: snapshot.ref.set(updateObject)
-// 	).then(() => res.json({ ...data, id })).catch(() => res.status(500).json({}))
-// })
+app.patch('/api/:project/:records/:recordId', ({ params: { project, records, recordId }, body }, res) =>
+	getRecordsSnapshot(project, records).then(snapshot => {
+		if (snapshot.exists) {
+			const newRecord = {
+				...JSON.parse(snapshot.get(recordId)),
+				...body,
+				id: undefined
+			}
+			return snapshot.ref
+				.update({ [recordId]: JSON.stringify(newRecord) })
+				.then(() => res.json({ ...newRecord, id: recordId }))
+		}
+		return snapshot.ref
+			.set({ [recordId]: JSON.stringify({ ...body, id: undefined }) })
+			.then(() => res.json({ ...body, id: recordId }))
+	}).catch(() => res.status(500).json({}))
+)
 
 // Delete record
 // app.delete('/:path/:id', (req, res) => {
