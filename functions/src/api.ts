@@ -102,10 +102,11 @@ app.patch('/api/:project/:records/:recordId', ({ params: { project, records, rec
 
 // Delete project
 app.delete('/api/:project', ({ params: { project } }, res) =>
-	firestore.doc(`projects/${project}`)
-		.delete()
-		.then(() => res.json())
-		.catch(() => res.status(500).json())
+	firestore.collection(`projects/${project}/data`).listDocuments().then(documents =>
+		Promise.all(documents.map(document =>
+			document.delete()
+		))
+	).then(() => res.json()).catch(() => res.status(500).json())
 )
 
 // Delete record list
