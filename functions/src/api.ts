@@ -26,13 +26,14 @@ const createSendableRecordsFromDocumentSnapshot = (snapshot: FirebaseFirestore.D
 		createSendableRecord(id, json)
 	)
 
-const createRecord = (project: string, records: string, id: string, res: express.Response, data: object): Promise<express.Response> =>
-	getRecordsSnapshot(project, records).then(snapshot =>
-		(snapshot.exists
-			? snapshot.ref.update
-			: snapshot.ref.set
-		)({ [id]: JSON.stringify({ ...data, id: undefined }) })
+const createRecord = (project: string, records: string, id: string, res: express.Response, data: object): Promise<express.Response> => {
+	const updateObject = { [id]: JSON.stringify({ ...data, id: undefined }) }
+	return getRecordsSnapshot(project, records).then(snapshot =>
+		snapshot.exists
+			? snapshot.ref.update(updateObject)
+			: snapshot.ref.set(updateObject)
 	).then(() => res.json({ ...data, id })).catch(() => res.status(500).json({}))
+}
 
 const newId = (): string =>
 	secure.newId(ID_LENGTH)
