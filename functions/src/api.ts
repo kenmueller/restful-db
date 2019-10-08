@@ -1,19 +1,29 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
 import * as express from 'express'
+import * as secure from 'securejs'
+import * as _ from 'lodash'
+
+import { ID_LENGTH } from './constants'
 
 const app = express()
 const firestore = admin.firestore()
 
 export const api = functions.https.onRequest(app)
 
+const documentFromPath = (path: string): FirebaseFirestore.DocumentReference =>
+	firestore.doc(`api/${path}`)
+
 const snapshotFromPath = (path: string): Promise<FirebaseFirestore.DocumentSnapshot> =>
-	firestore.doc(`api/${path}`).get()
+	documentFromPath(path).get()
 
 const createSendableRecord = (id: string, json: string): { id: string } & object => ({
 	...JSON.parse(json),
 	id
 })
+
+const newId = (): string =>
+	secure.newId(ID_LENGTH)
 
 // List all records
 app.get('/:path', (req, res) =>
@@ -36,9 +46,17 @@ app.get('/:path/:id', (req, res) => {
 })
 
 // Create record
-// app.post('/:path', (req, res) => {
-	
-// })
+app.post('/:path', (req, res) => {
+	const { params, body } = req
+	const documentReference = documentFromPath(params.path)
+	const id = newId()
+	const updateObject = { [id]: JSON.stringify(_.omit(body, 'id')) }
+	return documentReference.get().then(document =>
+		document.exists
+			? documentReference.update(updateObject)
+			: documentReference.set(updateObject)
+	).then(() => res.json({ ...body, id })).catch(() => res.status(500).json({}))
+})
 
 // Update all properties of a record
 // app.put('/:path/:id', (req, res) => {
