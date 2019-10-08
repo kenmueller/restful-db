@@ -1,7 +1,7 @@
 import React from 'react'
 import * as Bulma from 'react-bulma-components'
 
-import '../css/App.scss'
+import '../scss/App.scss'
 import fullLogo from '../images/logo-full.png'
 import truncatedLogo from '../images/logo-truncated.png'
 import CopyableTextBox from './CopyableTextBox'
