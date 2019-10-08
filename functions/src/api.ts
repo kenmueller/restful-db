@@ -26,6 +26,15 @@ const createSendableRecordsFromDocumentSnapshot = (snapshot: FirebaseFirestore.D
 		createSendableRecord(id, json)
 	)
 
+const createRecord = (project: string, path: string, id: string, res: express.Response, data: object): Promise<express.Response> => {
+	const updateObject = { [id]: JSON.stringify({ ...data, id: undefined }) }
+	return snapshotFromPath(project, path).then(snapshot =>
+		snapshot.exists
+			? snapshot.ref.update(updateObject)
+			: snapshot.ref.set(updateObject)
+	).then(() => res.json({ ...data, id })).catch(() => res.status(500).json({}))
+}
+
 const newId = (): string =>
 	secure.newId(ID_LENGTH)
 
@@ -63,24 +72,15 @@ app.get('/:project/:path/:id', (req, res) => {
 app.post('/:project/:path', (req, res) => {
 	const { params, body } = req
 	const { project, path } = params
-	const id = newId()
-	const updateObject = { [id]: JSON.stringify({ ...body, id: undefined }) }
-	return snapshotFromPath(project, path).then(snapshot =>
-		snapshot.exists
-			? snapshot.ref.update(updateObject)
-			: snapshot.ref.set(updateObject)
-	).then(() => res.json({ ...body, id })).catch(() => res.status(500).json({}))
+	return createRecord(project, path, newId(), res, body)
 })
 
 // Update all properties of a record
-// app.put('/:path/:id', (req, res) => {
-// 	const { params, body } = req
-// 	const { path, id } = params
-// 	const documentReference = documentFromPath(path)
-// 	return documentReference.get().then(snapshot =>
-		
-// 	)
-// })
+app.put('/:project/:path/:id', (req, res) => {
+	const { params, body } = req
+	const { project, path, id } = params
+	return createRecord(project, path, id, res, body)
+})
 
 // Update some properties of a record
 // app.patch('/:path/:id', (req, res) => {
