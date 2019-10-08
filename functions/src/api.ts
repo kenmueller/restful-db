@@ -21,17 +21,31 @@ const createSendableRecord = (id: string, json: string): { id: string } & object
 	id
 })
 
+const createSendableRecordsFromDocumentSnapshot = (snapshot: FirebaseFirestore.DocumentSnapshot): ({ id: string } & object)[] =>
+	Object.entries(snapshot.data() || {}).map(([id, json]: [string, string]) =>
+		createSendableRecord(id, json)
+	)
+
 const newId = (): string =>
 	secure.newId(ID_LENGTH)
+
+// Get all data for a project
+app.get('/:project', (req, res) =>
+	firestore.collection(req.params.project).get().then(snapshot =>
+		snapshot.docs.reduce((acc, document) => ({
+			...acc,
+			[document.id]: createSendableRecordsFromDocumentSnapshot(document)
+		}), {})
+	).then(res.json.bind(res)).catch(() => res.status(500).json({}))
+)
 
 // List all records
 app.get('/:project/:path', (req, res) => {
 	const { project, path } = req.params
-	return snapshotFromPath(project, path).then(snapshot =>
-		Object.entries(snapshot.data() || {}).map(([id, json]: [string, string]) =>
-			createSendableRecord(id, json)
-		)
-	).then(res.json.bind(res)).catch(() => res.status(500).json([]))
+	return snapshotFromPath(project, path)
+		.then(createSendableRecordsFromDocumentSnapshot)
+		.then(res.json.bind(res))
+		.catch(() => res.status(500).json([]))
 })
 
 // Get record
