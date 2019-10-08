@@ -1,7 +1,7 @@
 {
-	"api (collection)": {
-		"aa-32ab-b (document)": {
-			"abc123-00": "{\"key\":\"value\"}"
+	"memorize.ai (collection)": { // Project name
+		"users (document)": { // Record list
+			"abc123-00": "{\"key\":\"value\"}" // (ID: JSON) Record
 		}
 	}
 }
