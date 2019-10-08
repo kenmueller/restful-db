@@ -1,7 +1,12 @@
 {
-	"memorize.ai (collection)": { // Project name
-		"users (document)": { // Record list
-			"abc123-00": "{\"key\":\"value\"}" // (ID: JSON) Record
+	"projects (collection)": {
+		"Aj49a0aSf4K8 (document)": { // Project ID
+			"data (collection)": { // Where the records are located
+				"users (document)": { // Record list
+					"abc123-00": "{\"name\":\"Scott\"}", // (ID: JSON) Record
+					"abc123-00af": "{\"name\":\"Ken\"}" // (ID: JSON) Record
+				}
+			}
 		}
 	}
 }
