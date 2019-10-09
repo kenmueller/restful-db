@@ -100,7 +100,13 @@ class Home extends React.Component<HomeProps> {
 								<h3 className="subtitle light-color">Go to <Link to="/docs"><b>/docs</b></Link> to learn more</h3>
 								<br />
 								<h3 className="subtitle light-color">
-									By <a href="https://github.com/kenmueller" target="_blank">Ken Mueller</a>
+									By <a
+										href="https://github.com/kenmueller"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										Ken Mueller
+									</a>
 								</h3>
 							</Bulma.Columns.Column>
 						</Bulma.Columns>
