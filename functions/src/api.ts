@@ -4,6 +4,7 @@ import * as express from 'express'
 import * as secure from 'securejs'
 
 import { ID_LENGTH } from './constants'
+import { Record, RecordData } from './types'
 
 const app = express()
 const firestore = admin.firestore()
@@ -16,17 +17,17 @@ const getRecordsReference = (project: string, records: string): FirebaseFirestor
 const getRecordsSnapshot = (project: string, records: string): Promise<FirebaseFirestore.DocumentSnapshot> =>
 	getRecordsReference(project, records).get()
 
-const createSendableRecord = (id: string, json: string): { id: string } & object => ({
+const createSendableRecord = (id: string, json: string): Record => ({
 	...JSON.parse(json),
 	id
 })
 
-const createSendableRecordsFromDocumentSnapshot = (snapshot: FirebaseFirestore.DocumentSnapshot): ({ id: string } & object)[] =>
+const createSendableRecordsFromDocumentSnapshot = (snapshot: FirebaseFirestore.DocumentSnapshot): Record[] =>
 	Object.entries(snapshot.data() || {}).map(([id, json]: [string, string]) =>
 		createSendableRecord(id, json)
 	)
 
-const createRecord = (project: string, records: string, id: string, res: express.Response, data: object): Promise<express.Response> => {
+const createRecord = (project: string, records: string, id: string, res: express.Response, data: RecordData): Promise<express.Response> => {
 	const updateObject = { [id]: JSON.stringify({ ...data, id: undefined }) }
 	return getRecordsSnapshot(project, records).then(snapshot =>
 		snapshot.exists
