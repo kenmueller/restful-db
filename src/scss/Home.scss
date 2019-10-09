@@ -1,0 +1,45 @@
+@import 'constants.scss';
+
+* {
+	font-family: 'Press Start 2P', monospace;
+}
+
+body {
+	background-color: $light-background-color;
+}
+
+.home-hero {
+	background-color: $dark-background-color;
+}
+
+.navbar-logo {
+	height: 40px;
+	margin-top: 20px;
+}
+
+.main-logo {
+	height: 80px;
+}
+
+.light-color {
+	color: $light-background-color !important;
+}
+
+.main-packages {
+	margin: 80px auto 0 auto;
+	width: 635px;
+	.title {
+		text-align: left;
+	}
+}
+
+.navbar-right-tabs {
+	ul li {
+		a {
+			color: $light-blue-color;
+		}
+		a:hover {
+			color: $neon-green-color;
+		}
+	}
+}
