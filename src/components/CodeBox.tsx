@@ -51,7 +51,7 @@ export default class extends React.Component<CodeBoxProps> {
 			width,
 			centered
 		} = this.props
-		const horizontalMargin = centered ? 'auto' : ''
+		const horizontalMargin = centered ? 'auto' : undefined
 		return (
 			<pre
 				className="copyable-code-box"
