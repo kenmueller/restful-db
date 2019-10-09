@@ -5,11 +5,11 @@
 }
 
 html {
-	background-color: #4b4a4a;
+	background-color: $light-gray-color;
 }
 
 .home-hero {
-	background-color: $dark-background-color;
+	background-color: $dark-gray-color;
 }
 
 .navbar-logo {
@@ -22,15 +22,15 @@ html {
 }
 
 .light-color {
-	color: $light-background-color !important;
+	color: $off-white-color !important;
 }
 
 .dark-background-color {
-	background-color: #333;
+	background-color: $medium-gray-color;
 }
 
 .light-background-color {
-	background-color: #4b4a4a;
+	background-color: $light-gray-color;
 }
 
 .main-packages {
