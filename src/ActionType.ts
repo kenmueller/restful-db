@@ -1,5 +1,5 @@
 enum ActionType {
-	ProjectIdReload
+	ReloadProjectId
 }
 
 export default ActionType
