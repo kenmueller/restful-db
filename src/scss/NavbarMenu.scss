@@ -1,0 +1,9 @@
+@import 'colors.scss';
+
+.navbar-menu-right-tabs {
+	margin-top: 10px;
+	ul li a {
+		color: $light-blue-color;
+		border-bottom: 0;
+	}
+}

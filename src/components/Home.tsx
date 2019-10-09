@@ -5,11 +5,11 @@ import * as Bulma from 'react-bulma-components'
 
 import { HomeProps } from '../types/props'
 import { AppState } from '../reducers'
+import Navbar from './Navbar'
 import CodeBox from './CodeBox'
 
 import '../scss/Home.scss'
 import logo from '../images/logo.png'
-import compactLogo from '../images/compact-logo.png'
 
 class Home extends React.Component<HomeProps> {
 	renderDatabaseInitialization(): JSX.Element {
@@ -26,29 +26,7 @@ class Home extends React.Component<HomeProps> {
 		return (
 			<>
 				<Bulma.Hero size="medium" textWeight="bold" className="home-hero">
-					<Bulma.Hero.Head>
-						<Bulma.Navbar>
-							<Bulma.Container>
-								<Link to="/">
-									<img
-										src={compactLogo}
-										alt="Logo"
-										className="navbar-logo"
-									/>
-								</Link>
-								<Bulma.Navbar.Menu>
-									<div className="navbar-end">
-										<Bulma.Tabs align="right" className="navbar-right-tabs">
-											<ul>
-												<li><Link to="/">Home</Link></li>
-												<li><Link to="/docs">Documentation</Link></li>
-											</ul>
-										</Bulma.Tabs>
-									</div>
-								</Bulma.Navbar.Menu>
-							</Bulma.Container>
-						</Bulma.Navbar>
-					</Bulma.Hero.Head>
+					<Navbar />
 					<Bulma.Hero.Body>
 						<Bulma.Content textAlignment="centered">
 							<img

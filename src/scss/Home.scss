@@ -12,11 +12,6 @@ html {
 	background-color: $dark-gray-color;
 }
 
-.navbar-logo {
-	height: 40px;
-	margin-top: 20px;
-}
-
 .main-logo {
 	height: 80px;
 }
@@ -43,14 +38,6 @@ html {
 
 a:hover {
 	color: $neon-green-color !important;
-}
-
-.navbar-right-tabs {
-	margin-top: 10px;
-	ul li a {
-		color: $light-blue-color;
-		border-bottom: 0;
-	}
 }
 
 .create-new-project .choose-project-id {
