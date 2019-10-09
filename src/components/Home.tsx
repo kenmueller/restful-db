@@ -1,10 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-class Home extends React.Component {
+import { HomeProps } from '../prop-types'
+import { AppState } from '../reducers'
+import { reloadProjectId } from '../actions'
+
+class Home extends React.Component<HomeProps> {
 	render() {
-		return <>Home</>
+		return (
+			<>
+				{this.props.projectId}
+			</>
+		)
 	}
 }
 
-export default connect()(Home)
+const mapStateToProps = ({ projectId }: AppState) => ({ projectId })
+
+export default connect(mapStateToProps, { reloadProjectId })(Home)
