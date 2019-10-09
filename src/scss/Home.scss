@@ -25,6 +25,10 @@ body {
 	color: $light-background-color !important;
 }
 
+.dark-background-color {
+	background-color: #333333;
+}
+
 .main-packages {
 	margin: 80px auto 0 auto;
 	width: 635px;
@@ -33,13 +37,18 @@ body {
 	}
 }
 
-.navbar-right-tabs {
-	ul li {
-		a {
-			color: $light-blue-color;
-		}
-		a:hover {
-			color: $neon-green-color;
-		}
+.navbar-right-tabs ul li {
+	a {
+		color: $light-blue-color;
 	}
+	a:hover {
+		color: $neon-green-color;
+	}
+}
+
+.create-new-project .choose-project-id {
+	.subtitle {
+		margin-top: 60px;
+	}
+	margin-bottom: 30px;
 }

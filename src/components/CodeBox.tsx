@@ -1,11 +1,11 @@
 import React from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 
-import { CopyableCodeBoxProps } from '../types/props'
+import { CodeBoxProps } from '../types/props'
 
-import '../scss/CopyableCodeBox.scss'
+import '../scss/CodeBox.scss'
 
-export default class extends React.Component<CopyableCodeBoxProps> {
+export default class extends React.Component<CodeBoxProps> {
 	static defaultProps = {
 		textColor: 'white',
 		backgroundColor: '#1e1e1e',
@@ -14,18 +14,40 @@ export default class extends React.Component<CopyableCodeBoxProps> {
 		copyButtonTextColor: '#ffdd57',
 		copyButtonBackgroundColor: 'transparent',
 		width: '100%',
-		centered: false
+		centered: false,
+	}
+
+	renderCopyButton(): JSX.Element | null {
+		const {
+			copyableText,
+			copyButtonTextColor,
+			copyButtonBackgroundColor
+		} = this.props
+		return copyableText
+			? (
+				<CopyToClipboard text={copyableText}>
+					<code
+						className="copy-button"
+						style={{
+							color: copyButtonTextColor,
+							backgroundColor: copyButtonBackgroundColor
+						}}
+					>
+						copy
+					</code>
+				</CopyToClipboard>
+			)
+			: null
 	}
 
 	render() {
 		const {
-			text,
+			children,
+			copyableText,
 			textColor,
 			backgroundColor,
 			borderWidth,
 			borderColor,
-			copyButtonTextColor,
-			copyButtonBackgroundColor,
 			width,
 			centered
 		} = this.props
@@ -42,18 +64,8 @@ export default class extends React.Component<CopyableCodeBoxProps> {
 					marginRight: horizontalMargin
 				}}
 			>
-				<code>{text}</code>
-				<CopyToClipboard text={text}>
-					<code
-						className="copy-button"
-						style={{
-							color: copyButtonTextColor,
-							backgroundColor: copyButtonBackgroundColor
-						}}
-					>
-						copy
-					</code>
-				</CopyToClipboard>
+				<code>{children || copyableText}</code>
+				{this.renderCopyButton()}
 			</pre>
 		)
 	}

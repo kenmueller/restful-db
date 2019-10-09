@@ -5,8 +5,8 @@ export interface HomeProps {
 	reloadProjectId: typeof reloadProjectId
 }
 
-export interface CopyableCodeBoxProps {
-	text: string
+export interface CodeBoxProps {
+	copyableText?: string
 	textColor: string
 	backgroundColor: string
 	borderWidth: number
