@@ -5,7 +5,6 @@ import * as Bulma from 'react-bulma-components'
 
 import { HomeProps } from '../types/props'
 import { AppState } from '../reducers'
-import { reloadProjectId } from '../actions'
 import CodeBox from './CodeBox'
 
 import '../scss/Home.scss'
@@ -119,4 +118,4 @@ class Home extends React.Component<HomeProps> {
 
 const mapStateToProps = ({ projectId }: AppState) => ({ projectId })
 
-export default connect(mapStateToProps, { reloadProjectId })(Home)
+export default connect(mapStateToProps)(Home)
