@@ -13,7 +13,7 @@ class Documentation extends React.Component<DocumentationProps> {
 		return (
 			<Bulma.Hero size="medium" textWeight="bold" className="documentation-hero">
 				<Navbar>
-					Documentation
+					<h1 className="subtitle light-color navbar-documentation-label">Documentation</h1>
 				</Navbar>
 			</Bulma.Hero>
 		)

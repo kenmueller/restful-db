@@ -2,4 +2,15 @@
 
 .documentation-hero {
 	background-color: $dark-gray-color;
+	height: 600px;
+}
+
+.light-color {
+	color: $off-white-color !important;
+}
+
+.navbar-documentation-label {
+	height: 0;
+	margin-top: 28px;
+	margin-left: 20px;
 }
