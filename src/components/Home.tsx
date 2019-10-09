@@ -64,7 +64,7 @@ class Home extends React.Component<HomeProps> {
 								<h1 className="title light-color">NPM</h1>
 								<CodeBox
 									copyableText="npm i restful-db"
-									width="250px"
+									width="635px"
 								/>
 								<h1 className="title light-color">Browser</h1>
 								<CodeBox
@@ -87,7 +87,21 @@ class Home extends React.Component<HomeProps> {
 										width="635px"
 									/>
 								</div>
+								<h3 className="subtitle light-color">Setup code:</h3>
 								{this.renderDatabaseInitialization()}
+							</Bulma.Columns.Column>
+						</Bulma.Columns>
+					</Bulma.Container>
+				</Bulma.Section>
+				<Bulma.Section className="light-background-color">
+					<Bulma.Container>
+						<Bulma.Columns>
+							<Bulma.Columns.Column size="three-quarters" className="more-information">
+								<h3 className="subtitle light-color">Go to <Link to="/docs"><b>/docs</b></Link> to learn more</h3>
+								<br />
+								<h3 className="subtitle light-color">
+									By <a href="https://github.com/kenmueller" target="_blank">Ken Mueller</a>
+								</h3>
 							</Bulma.Columns.Column>
 						</Bulma.Columns>
 					</Bulma.Container>

@@ -26,7 +26,11 @@ body {
 }
 
 .dark-background-color {
-	background-color: #333333;
+	background-color: #333;
+}
+
+.light-background-color {
+	background-color: #4b4a4a;
 }
 
 .main-packages {
@@ -37,12 +41,15 @@ body {
 	}
 }
 
-.navbar-right-tabs ul li {
-	a {
+a:hover {
+	color: $neon-green-color !important;
+}
+
+.navbar-right-tabs {
+	margin-top: 10px;
+	ul li a {
 		color: $light-blue-color;
-	}
-	a:hover {
-		color: $neon-green-color;
+		border-bottom: 0;
 	}
 }
 
