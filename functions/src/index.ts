@@ -2,4 +2,4 @@ import * as admin from 'firebase-admin'
 
 admin.initializeApp()
 
-export { api } from './api'
+export { default as api } from './api'
