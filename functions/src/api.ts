@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
 import * as express from 'express'
+import * as cors from 'cors'
 import * as secure from 'securejs'
 
 import { ID_LENGTH } from './constants'
@@ -43,6 +44,8 @@ const shouldDeleteRecordList = (records: FirebaseFirestore.DocumentData, deleted
 	const keys = Object.keys(records)
 	return keys.length === 1 && keys[0] === deletedRecord
 }
+
+app.use(cors())
 
 // Get all data for a project
 app.get('/api/:project', ({ params: { project } }, res) =>
