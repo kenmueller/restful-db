@@ -40,7 +40,7 @@ export default class extends React.Component<CodeBoxProps> {
 			: null
 	}
 
-	render = () => {
+	render = ():  JSX.Element => {
 		const {
 			children,
 			copyableText,

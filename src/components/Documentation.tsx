@@ -37,7 +37,7 @@ class Documentation extends React.Component<DocumentationProps> {
 		}
 	}
 	
-	render = () => (
+	render = ():  JSX.Element => (
 		<Bulma.Hero size="medium" textWeight="bold" className="documentation-hero">
 			<Navbar>
 				<h1 className="subtitle light-color navbar-documentation-label">Documentation</h1>
@@ -57,7 +57,7 @@ class Documentation extends React.Component<DocumentationProps> {
 							<p className="menu-label">Documentation</p>
 							<Bulma.Menu.List>
 								<Bulma.Menu.List.Item>
-									<Link to=""></Link>
+									<Link to="/"></Link>
 								</Bulma.Menu.List.Item>
 							</Bulma.Menu.List>
 						</Bulma.Menu>

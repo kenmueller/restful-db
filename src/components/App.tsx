@@ -9,7 +9,7 @@ import Documentation from './Documentation'
 import 'bulma'
 
 export default class extends React.Component {
-	render = () => (
+	render = (): JSX.Element => (
 		<Router history={history}>
 			<Switch>
 				<Route exact path="/" component={Home} />

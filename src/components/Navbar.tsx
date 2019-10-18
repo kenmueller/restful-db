@@ -5,7 +5,7 @@ import NavbarLogo from './NavbarLogo'
 import NavbarMenu from './NavbarMenu'
 
 export default class extends React.Component {
-	render = () => (
+	render = ():  JSX.Element => (
 		<Bulma.Hero.Head>
 			<Bulma.Navbar>
 				<Bulma.Container>

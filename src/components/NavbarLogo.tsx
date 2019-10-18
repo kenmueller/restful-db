@@ -5,7 +5,7 @@ import '../scss/NavbarLogo.scss'
 import compactLogo from '../images/compact-logo.png'
 
 export default class extends React.Component {
-	render = () => (
+	render = ():  JSX.Element => (
 		<Link to="/">
 			<img
 				src={compactLogo}

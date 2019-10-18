@@ -23,3 +23,12 @@ export interface CodeBoxProps {
 	width: string
 	centered: boolean
 }
+
+export interface DocumentationListProps {
+	name: string
+}
+
+export interface DocumentationListItemProps {
+	name: string
+	path: string
+}
