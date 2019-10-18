@@ -17,7 +17,7 @@ export default class extends React.Component<CodeBoxProps> {
 		centered: false,
 	}
 
-	renderCopyButton(): JSX.Element | null {
+	renderCopyButton = (): JSX.Element | null => {
 		const {
 			copyableText,
 			copyButtonTextColor,
@@ -40,7 +40,7 @@ export default class extends React.Component<CodeBoxProps> {
 			: null
 	}
 
-	render() {
+	render = () => {
 		const {
 			children,
 			copyableText,

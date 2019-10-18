@@ -4,6 +4,12 @@ export interface HomeProps {
 
 export interface DocumentationProps {
 	projectId: string
+	match: {
+		params: {
+			section: string
+			document: string
+		}
+	}
 }
 
 export interface CodeBoxProps {

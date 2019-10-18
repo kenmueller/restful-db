@@ -5,17 +5,15 @@ import NavbarLogo from './NavbarLogo'
 import NavbarMenu from './NavbarMenu'
 
 export default class extends React.Component {
-	render() {
-		return (
-			<Bulma.Hero.Head>
-				<Bulma.Navbar>
-					<Bulma.Container>
-						<NavbarLogo />
-						{this.props.children}
-						<NavbarMenu />
-					</Bulma.Container>
-				</Bulma.Navbar>
-			</Bulma.Hero.Head>
-		)
-	}
+	render = () => (
+		<Bulma.Hero.Head>
+			<Bulma.Navbar>
+				<Bulma.Container>
+					<NavbarLogo />
+					{this.props.children}
+					<NavbarMenu />
+				</Bulma.Container>
+			</Bulma.Navbar>
+		</Bulma.Hero.Head>
+	)
 }

@@ -1,19 +1,21 @@
 import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import 'bulma'
+import { Router, Route, Switch, Redirect } from 'react-router-dom'
 
+import { DEFAULT_DOCUMENTATION_PATH } from '../constants'
+import history from '../history'
 import Home from './Home'
 import Documentation from './Documentation'
 
+import 'bulma'
+
 export default class extends React.Component {
-	render() {
-		return (
-			<BrowserRouter>
-				<Switch>
-					<Route exact path="/" component={Home} />
-					<Route exact path="/docs" component={Documentation} />
-				</Switch>
-			</BrowserRouter>
-		)
-	}
+	render = () => (
+		<Router history={history}>
+			<Switch>
+				<Route exact path="/" component={Home} />
+				<Route exact path="/docs/:section/:document" component={Documentation} />
+				<Redirect exact from="/docs" to={DEFAULT_DOCUMENTATION_PATH} />
+			</Switch>
+		</Router>
+	)
 }
