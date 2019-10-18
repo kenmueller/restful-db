@@ -21,7 +21,7 @@ class Home extends React.Component<HomeProps> {
 		</CodeBox>
 	)
 
-	render = ():  JSX.Element => (
+	render = (): JSX.Element => (
 		<>
 			<Bulma.Hero size="medium" textWeight="bold" className="home-hero">
 				<Navbar />

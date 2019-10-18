@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import * as Bulma from 'react-bulma-components'
 
 import { DEFAULT_DOCUMENTATION_PATH } from '../constants'
@@ -9,14 +8,13 @@ import { DocumentationProps } from '../types/props'
 import { AppState } from '../reducers'
 import Navbar from './Navbar'
 import CodeBox from './CodeBox'
+import DocumentationMenu from './DocumentationMenu'
 
 import '../scss/Documentation.scss'
 
-
 class Documentation extends React.Component<DocumentationProps> {
-	renderCurrentDocument = (): JSX.Element | null => {
-		const { section, document } = this.props.match.params
-		switch (`${section}/${document}`) {
+	renderCurrentDocument = (path: string): JSX.Element | null => {
+		switch (path) {
 			case 'install/npm':
 				return <>NPM Installation</>
 			case 'install/browser':
@@ -37,40 +35,37 @@ class Documentation extends React.Component<DocumentationProps> {
 		}
 	}
 	
-	render = ():  JSX.Element => (
-		<Bulma.Hero size="medium" textWeight="bold" className="documentation-hero">
-			<Navbar>
-				<h1 className="subtitle light-color navbar-documentation-label">Documentation</h1>
-			</Navbar>
-			<Bulma.Hero.Body>
-				<Bulma.Content textAlignment="centered">
-					<h3 className="subtitle light-color">Your unique project ID:</h3>
-					<CodeBox
-						copyableText={this.props.projectId}
-						width="635px"
-						centered
-					/>
-				</Bulma.Content>
-				<Bulma.Columns>
-					<Bulma.Columns.Column size={2} textAlignment="centered">
-						<Bulma.Menu>
-							<p className="menu-label">Documentation</p>
-							<Bulma.Menu.List>
-								<Bulma.Menu.List.Item>
-									<Link to="/"></Link>
-								</Bulma.Menu.List.Item>
-							</Bulma.Menu.List>
-						</Bulma.Menu>
-					</Bulma.Columns.Column>
-					<Bulma.Columns.Column size={8}>
-						<Bulma.Box>
-							{this.renderCurrentDocument()}
-						</Bulma.Box>
-					</Bulma.Columns.Column>
-				</Bulma.Columns>
-			</Bulma.Hero.Body>
-		</Bulma.Hero>
-	)
+	render = (): JSX.Element => {
+		const { section, document } = this.props.match.params
+		const currentPath = `${section}/${document}`
+		return (
+			<Bulma.Hero size="medium" textWeight="bold" className="documentation-hero">
+				<Navbar>
+					<h1 className="subtitle light-color navbar-documentation-label">Documentation</h1>
+				</Navbar>
+				<Bulma.Hero.Body>
+					<Bulma.Content textAlignment="centered">
+						<h3 className="subtitle light-color">Your unique project ID:</h3>
+						<CodeBox
+							copyableText={this.props.projectId}
+							width="635px"
+							centered
+						/>
+					</Bulma.Content>
+					<Bulma.Columns>
+						<Bulma.Columns.Column size={2}>
+							<DocumentationMenu currentPath={currentPath} />
+						</Bulma.Columns.Column>
+						<Bulma.Columns.Column size={8}>
+							<Bulma.Box>
+								{this.renderCurrentDocument(currentPath)}
+							</Bulma.Box>
+						</Bulma.Columns.Column>
+					</Bulma.Columns>
+				</Bulma.Hero.Body>
+			</Bulma.Hero>
+		)
+	}
 }
 
 const mapStateToProps = ({ projectId }: AppState) => ({ projectId })

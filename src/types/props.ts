@@ -24,6 +24,10 @@ export interface CodeBoxProps {
 	centered: boolean
 }
 
+export interface DocumentationMenuProps {
+	currentPath: string
+}
+
 export interface DocumentationListProps {
 	name: string
 }
@@ -31,4 +35,5 @@ export interface DocumentationListProps {
 export interface DocumentationListItemProps {
 	name: string
 	path: string
+	currentPath: string
 }

@@ -7,7 +7,7 @@ import { DEFAULT_DOCUMENTATION_PATH } from '../constants'
 import '../scss/NavbarMenu.scss'
 
 export default class extends React.Component {
-	render = ():  JSX.Element => (
+	render = (): JSX.Element => (
 		<Bulma.Navbar.Menu>
 			<div className="navbar-end">
 				<Bulma.Tabs align="right" className="navbar-menu-right-tabs">
