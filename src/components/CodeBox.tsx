@@ -14,7 +14,7 @@ export default class extends React.Component<CodeBoxProps> {
 		copyButtonTextColor: '#ffdd57',
 		copyButtonBackgroundColor: 'transparent',
 		width: '100%',
-		centered: false,
+		centered: false
 	}
 
 	renderCopyButton = (): JSX.Element | null => {
