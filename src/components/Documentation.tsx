@@ -8,6 +8,12 @@ import Navbar from './Navbar'
 import DocumentationMenu from './DocumentationMenu'
 
 import NPMInstallationDocumentation from './documentation/NPMInstallationDocumentation'
+import BrowserInstallationDocumentation from './documentation/BrowserInstallationDocumentation'
+import RetrievingDataDocumentation from './documentation/RetrievingDataDocumentation'
+import AddingRecordsDocumentation from './documentation/AddingRecordsDocumentation'
+import UpdatingRecordsDocumentation from './documentation/UpdatingRecordsDocumentation'
+import DeletingRecordsDocumentation from './documentation/DeletingRecordsDocumentation'
+import RestEndpointsDocumentation from './documentation/RestEndpointsDocumentation'
 
 import '../scss/Documentation.scss'
 
@@ -17,17 +23,17 @@ export default class extends React.Component<DocumentationProps> {
 			case 'install/npm':
 				return <NPMInstallationDocumentation />
 			case 'install/browser':
-				return <>Browser Installation</>
+				return <BrowserInstallationDocumentation />
 			case 'getting-started/retrieving-data':
-				return <>Retrieving Data</>
+				return <RetrievingDataDocumentation />
 			case 'getting-started/adding-records':
-				return <>Adding Records</>
+				return <AddingRecordsDocumentation />
 			case 'getting-started/updating-records':
-				return <>Updating Records</>
+				return <UpdatingRecordsDocumentation />
 			case 'getting-started/deleting-records':
-				return <>Deleting Records</>
+				return <DeletingRecordsDocumentation />
 			case 'rest/endpoints':
-				return <>REST Endpoints</>
+				return <RestEndpointsDocumentation />
 			default:
 				history.push(DEFAULT_DOCUMENTATION_PATH)
 				return null
