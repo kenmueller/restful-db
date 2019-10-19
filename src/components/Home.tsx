@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom'
 import * as Bulma from 'react-bulma-components'
 
@@ -23,6 +24,9 @@ class Home extends React.Component<HomeProps> {
 
 	render = (): JSX.Element => (
 		<>
+			<Helmet>
+				<title>Restful DB</title>
+			</Helmet>
 			<Bulma.Hero size="medium" textWeight="bold" className="home-hero">
 				<Navbar />
 				<Bulma.Hero.Body>

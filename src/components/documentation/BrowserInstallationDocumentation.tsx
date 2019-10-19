@@ -30,6 +30,12 @@ class BrowserInstallationDocumentation extends React.Component<BrowserInstallati
 					<br /><br />
 					const db = new Database('{projectId}')
 				</CodeBox>
+				<br />
+				You can try out commands on this website!
+				<br /><br />
+				On Mac: Cmd+Option+J
+				<br />
+				On Windows: Ctrl+Shift+J
 			</>
 		)
 	}
