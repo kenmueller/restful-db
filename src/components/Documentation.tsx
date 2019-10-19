@@ -55,7 +55,7 @@ export default class extends React.Component<DocumentationProps> {
 								<DocumentationMenu currentPath={currentPath} />
 							</Bulma.Box>
 						</Bulma.Columns.Column>
-						<Bulma.Columns.Column size={8}>
+						<Bulma.Columns.Column size="three-quarters">
 							<Bulma.Box className="document">
 								{this.renderCurrentDocument(currentPath)}
 							</Bulma.Box>
