@@ -12,16 +12,10 @@ class NPMInstallationDocumentation extends React.Component<NPMInstallationDocume
 		return (
 			<>
 				<DocumentationHead name="NPM Installation" />
-				<CodeBox
-					copyableText="npm i restful-db"
-					width="635px"
-				/>
+				<CodeBox copyableText="npm i restful-db" width="635px" />
 				<br />
 				<p className="label-text">Your unique project ID:</p>
-				<CodeBox
-					copyableText={projectId}
-					width="635px"
-				/>
+				<CodeBox copyableText={projectId} width="635px" />
 				<br />
 				<p className="label-text">Database initialization:</p>
 				<CodeBox width="635px">

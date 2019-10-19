@@ -43,7 +43,7 @@ class Home extends React.Component<HomeProps> {
 							/>
 							<h1 className="title light-color">Browser</h1>
 							<CodeBox
-								copyableText={'<script src="https://wzrd.in/standalone/restful-db"></script>'}
+								copyableText={'<script src="https://restful-db.web.app/api.js"></script>'}
 								width="635px"
 							/>
 						</div>

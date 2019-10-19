@@ -45,3 +45,7 @@ export interface DocumentationHeadProps {
 export interface NPMInstallationDocumentationProps {
 	projectId: string
 }
+
+export interface BrowserInstallationDocumentationProps {
+	projectId: string
+}
