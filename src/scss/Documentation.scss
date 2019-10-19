@@ -1,16 +1,33 @@
 @import 'colors.scss';
 
+@mixin light-color {
+	color: $off-white-color !important;
+}
+
+html {
+	background-color: $light-gray-color !important;
+}
+
 .documentation-hero {
 	background-color: $dark-gray-color;
 	height: 600px;
 }
 
 .light-color {
-	color: $off-white-color !important;
+	@include light-color;
 }
 
 .navbar-documentation-label {
 	height: 0;
 	margin-top: 28px;
 	margin-left: 20px;
+}
+
+.document {
+	background-color: $medium-gray-color !important;
+	@include light-color;
+}
+
+.label-text {
+	margin-bottom: 10px;
 }

@@ -1,22 +1,21 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import * as Bulma from 'react-bulma-components'
 
 import { DEFAULT_DOCUMENTATION_PATH } from '../constants'
 import history from '../history'
 import { DocumentationProps } from '../types/props'
-import { AppState } from '../reducers'
 import Navbar from './Navbar'
-import CodeBox from './CodeBox'
 import DocumentationMenu from './DocumentationMenu'
+
+import NPMInstallationDocumentation from './documentation/NPMInstallationDocumentation'
 
 import '../scss/Documentation.scss'
 
-class Documentation extends React.Component<DocumentationProps> {
+export default class extends React.Component<DocumentationProps> {
 	renderCurrentDocument = (path: string): JSX.Element | null => {
 		switch (path) {
 			case 'install/npm':
-				return <>NPM Installation</>
+				return <NPMInstallationDocumentation />
 			case 'install/browser':
 				return <>Browser Installation</>
 			case 'getting-started/retrieving-data':
@@ -44,20 +43,14 @@ class Documentation extends React.Component<DocumentationProps> {
 					<h1 className="subtitle light-color navbar-documentation-label">Documentation</h1>
 				</Navbar>
 				<Bulma.Hero.Body>
-					<Bulma.Content textAlignment="centered">
-						<h3 className="subtitle light-color">Your unique project ID:</h3>
-						<CodeBox
-							copyableText={this.props.projectId}
-							width="635px"
-							centered
-						/>
-					</Bulma.Content>
 					<Bulma.Columns>
-						<Bulma.Columns.Column size={2}>
-							<DocumentationMenu currentPath={currentPath} />
+						<Bulma.Columns.Column size="one-quarter">
+							<Bulma.Box className="document">
+								<DocumentationMenu currentPath={currentPath} />
+							</Bulma.Box>
 						</Bulma.Columns.Column>
 						<Bulma.Columns.Column size={8}>
-							<Bulma.Box>
+							<Bulma.Box className="document">
 								{this.renderCurrentDocument(currentPath)}
 							</Bulma.Box>
 						</Bulma.Columns.Column>
@@ -67,7 +60,3 @@ class Documentation extends React.Component<DocumentationProps> {
 		)
 	}
 }
-
-const mapStateToProps = ({ projectId }: AppState) => ({ projectId })
-
-export default connect(mapStateToProps)(Documentation)

@@ -37,3 +37,11 @@ export interface DocumentationListItemProps {
 	path: string
 	currentPath: string
 }
+
+export interface DocumentationHeadProps {
+	name: string
+}
+
+export interface NPMInstallationDocumentationProps {
+	projectId: string
+}

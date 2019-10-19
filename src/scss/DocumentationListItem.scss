@@ -1,0 +1,16 @@
+@import 'colors.scss';
+
+@mixin selected {
+	background-color: $dark-gray-color !important;
+}
+
+.documentation-list-item:hover {
+	@include selected;
+}
+
+.documentation-list-item.selected {
+	@include selected;
+	.documentation-list-item-name {
+		color: $neon-green-color;
+	}
+}
