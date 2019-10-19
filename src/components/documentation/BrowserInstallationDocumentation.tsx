@@ -19,10 +19,7 @@ class BrowserInstallationDocumentation extends React.Component<BrowserInstallati
 				/>
 				<br />
 				<p className="label-text">Your unique project ID:</p>
-				<CodeBox
-					copyableText={projectId}
-					width="635px"
-				/>
+				<CodeBox copyableText={projectId} width="635px" />
 				<br />
 				<p className="label-text">Database initialization:</p>
 				<CodeBox width="635px">
