@@ -26,7 +26,7 @@ class BrowserInstallationDocumentation extends React.Component<BrowserInstallati
 				<br />
 				<p className="label-text">Database initialization:</p>
 				<CodeBox width="635px">
-					const {'{'} Database {'}'} = restfulDb
+					const {'{'} Database {'}'} = restfulDB
 					<br /><br />
 					const db = new Database('{projectId}')
 				</CodeBox>
