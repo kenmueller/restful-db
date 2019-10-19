@@ -2,8 +2,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 
 import { DocumentationHeadProps } from '../types/props'
-
-import '../scss/DocumentationHead.scss'
+import DocumentationDivider from './DocumentationDivider'
 
 export default class extends React.Component<DocumentationHeadProps> {
 	render = (): JSX.Element => {
@@ -14,7 +13,7 @@ export default class extends React.Component<DocumentationHeadProps> {
 					<title>Restful DB - {name}</title>
 				</Helmet>
 				<h1 className="title light-color">{name}</h1>
-				<hr className="documentation-head-separator" />
+				<DocumentationDivider />
 			</>
 		)
 	}

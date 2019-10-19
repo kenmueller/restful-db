@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { BrowserInstallationDocumentationProps } from '../../types/props'
 import { AppState } from '../../reducers'
 import DocumentationHead from '../DocumentationHead'
+import DocumentationDivider from '../DocumentationDivider'
 import CodeBox from '../CodeBox'
 
 class BrowserInstallationDocumentation extends React.Component<BrowserInstallationDocumentationProps> {
@@ -27,7 +28,7 @@ class BrowserInstallationDocumentation extends React.Component<BrowserInstallati
 					<br /><br />
 					const db = new Database('{projectId}')
 				</CodeBox>
-				<br />
+				<DocumentationDivider />
 				You can try out commands on this website!
 				<br /><br />
 				On Mac: Cmd+Option+J

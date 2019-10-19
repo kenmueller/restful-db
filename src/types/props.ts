@@ -49,3 +49,7 @@ export interface NPMInstallationDocumentationProps {
 export interface BrowserInstallationDocumentationProps {
 	projectId: string
 }
+
+export interface RestEndpointsDocumentationProps {
+	projectId: string
+}
